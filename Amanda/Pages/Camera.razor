@@ -1,7 +1,10 @@
 ﻿@page "/camera"
 @inject IJSRuntime _jsRuntime
+@implements IAsyncDisposable
+
 
 <video id="video" />
+
 
 @code {
 
@@ -12,4 +15,10 @@
             await _jsRuntime.InvokeVoidAsync("startVideo", "video");
         }
     }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _jsRuntime.InvokeVoidAsync("stopVideo", "video");
+    }
+
 }

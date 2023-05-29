@@ -16,3 +16,17 @@
         });
     }
 }
+
+function stopVideo(src) {
+    let video = document.getElementById(src);
+    if (video && video.srcObject) {
+        let stream = video.srcObject;
+        let tracks = stream.getTracks();
+
+        tracks.forEach(function (track) {
+            track.stop();
+        });
+
+        video.srcObject = null;
+    }
+}
